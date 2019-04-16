@@ -3,6 +3,7 @@ package edu.illinois.cs.cs125.spring2019.lab12;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,9 +38,13 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
-
-        startAPICall("192.17.96.8");
+        final Button button = findViewById(R.id.button);
+        button.setOnClickListener(v -> {
+            Log.d(TAG, "Open file button clicked");
+            startAPICall("192.17.96.8");
+        });
     }
+    
 
     /**
      * Run when this activity is no longer visible.
