@@ -1,7 +1,10 @@
 package edu.illinois.cs.cs125.spring2019.lab12;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+/**
+ * import android.graphics.Color;
+ * import android.graphics.drawable.ColorDrawable;
+ */
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
