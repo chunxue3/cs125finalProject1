@@ -1,9 +1,5 @@
 package edu.illinois.cs.cs125.spring2019.lab12;
 
-/**
- * import android.graphics.Color;
- * import android.graphics.drawable.ColorDrawable;
- */
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +23,9 @@ import org.json.JSONObject;
  * Main class for our UI design lab.
  */
 public final class MainActivity extends AppCompatActivity {
-    /** Default logging tag for messages from the main activity. */
+    /**
+     * Default logging tag for messages from the main activity.
+     */
     private static final String TAG = "Final Project for CS125";
     private static final String REQUESTTAG = "string request first";
     private TextView mDisplayDate;
@@ -39,8 +37,9 @@ public final class MainActivity extends AppCompatActivity {
     private String url = "http://numbersapi.com/";
 
 
-
-    /** Request queue for our API requests. */
+    /**
+     * Request queue for our API requests.
+     */
     private static RequestQueue requestQueue;
 
     /**
@@ -59,76 +58,43 @@ public final class MainActivity extends AppCompatActivity {
         Button btn1 = (Button) findViewById(R.id.enter1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-
+            public void onClick(final View v) {
                 TextView textView = (TextView) findViewById(R.id.outputDisplay);
                 EditText editText = (EditText) findViewById(R.id.enterNumber);
-
                 sendRequestAndPrintReponse1(textView, editText);
-
             }
         });
     }
 
-    /**
-     *
-     * final Button button = findViewById(R.id.button);
-     *         button.setOnClickListener(v -> {
-     *             Log.d(TAG, "Open file button clicked");
-     *             startAPICall("192.17.96.8");
-     *         });
-     *     }
-     */
-
-
-    /**
-     * Run when this activity is no longer visible.
-     */
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    /**
-     * Make a call to the IP geolocation API.
-     *
-     * @param ipAddress IP address to look up
-     */
-    void startAPICall(final String ipAddress) {
-        try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.GET,
-                    "https://ipinfo.io/" + ipAddress + "/json",
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(final JSONObject response) {
-                            apiCallDone(response);
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(final VolleyError error) {
-                            Log.e(TAG, error.toString());
-                        }
-                    });
-            jsonObjectRequest.setShouldCache(false);
-            requestQueue.add(jsonObjectRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
+        String value;
+        if (editText == null || editText.length() == 0) {
+            value = "random";
+        } else {
+            value = editText.getText().toString();
         }
-    }
-
-    /**
-     * Handle the response from our IP geolocation API.
-     *
-     * @param response response from our IP geolocation API.
-     */
-    void apiCallDone(final JSONObject response) {
-        try {
-            Log.d(TAG, response.toString(2));
-            // Example of how to pull a field off the returned JSON object
-            Log.i(TAG, response.get("hostname").toString());
-        } catch (JSONException ignored) { }
+        //int findValue = Integer.parseInt(value);
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                "http://numbersapi.com/" + value + "/trivia?json",
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(final JSONObject response) {
+                        Log.d(TAG, "Received response.");
+                        try {
+                            String string = response.getString("text");
+                            textView.setText(string);
+                        } catch (Exception e) {
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+                Log.e(TAG, "error.");
+                textView.setText("Got error, ");
+            }
+        });
+        mRequestQueue1.add(request);
     }
 }
