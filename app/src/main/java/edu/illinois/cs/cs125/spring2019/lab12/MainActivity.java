@@ -1,18 +1,23 @@
 package edu.illinois.cs.cs125.spring2019.lab12;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.app.DatePickerDialog;
 
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -20,7 +25,17 @@ import org.json.JSONObject;
  */
 public final class MainActivity extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
-    private static final String TAG = "Lab12:Main";
+    private static final String TAG = "Final Project for CS125";
+    private static final String REQUESTTAG = "string request first";
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TextView mEnterNumber;
+    private Button btnSendRequest1;
+    private RequestQueue mRequestQueue1;
+    private StringRequest stringRequest1;
+    private String url = "http://numbersapi.com/";
+
+
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
@@ -35,16 +50,34 @@ public final class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Set up the queue for our API requests
+        setContentView(R.layout.activity_main);
         requestQueue = Volley.newRequestQueue(this);
 
-        setContentView(R.layout.activity_main);
-        final Button button = findViewById(R.id.button);
-        button.setOnClickListener(v -> {
-            Log.d(TAG, "Open file button clicked");
-            startAPICall("192.17.96.8");
+        Button btn1 = (Button) findViewById(R.id.enter1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                TextView textView = (TextView) findViewById(R.id.outputDisplay);
+                EditText editText = (EditText) findViewById(R.id.enterNumber);
+
+                sendRequestAndPrintReponse1(textView, editText);
+
+            }
         });
     }
-    
+
+    /**
+     *
+     * final Button button = findViewById(R.id.button);
+     *         button.setOnClickListener(v -> {
+     *             Log.d(TAG, "Open file button clicked");
+     *             startAPICall("192.17.96.8");
+     *         });
+     *     }
+     */
+
 
     /**
      * Run when this activity is no longer visible.
