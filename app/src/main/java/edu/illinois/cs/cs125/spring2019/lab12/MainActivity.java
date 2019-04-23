@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.app.DatePickerDialog;
-
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,15 +23,7 @@ public final class MainActivity extends AppCompatActivity {
     /**
      * Default logging tag for messages from the main activity.
      */
-    private static final String TAG = "Final Project for CS125";
-    private static final String REQUESTTAG = "string request first";
-    private TextView mDisplayDate;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private TextView mEnterNumber;
-    private Button btnSendRequest1;
-    private RequestQueue mRequestQueue1;
-    private StringRequest stringRequest1;
-    private String url = "http://numbersapi.com/";
+    private static final String TAG = "Lab12:Main";
 
 
     /**
@@ -66,35 +55,40 @@ public final class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
-        String value;
-        if (editText == null || editText.length() == 0) {
-            value = "random";
-        } else {
-            value = editText.getText().toString();
-        }
-        //int findValue = Integer.parseInt(value);
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                "http://numbersapi.com/" + value + "/trivia?json",
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(final JSONObject response) {
-                        Log.d(TAG, "Received response.");
-                        try {
-                            String string = response.getString("text");
-                            textView.setText(string);
-                        } catch (Exception e) {
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(final VolleyError error) {
-                Log.e(TAG, "error.");
-                textView.setText("Got error, ");
-            }
-        });
-        mRequestQueue1.add(request);
-    }
+     private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
+         String value;
+         if (editText == null || editText.length() == 0) {
+             value = "random";
+         } else {
+             value = editText.getText().toString();
+         }
+         //int findValue = Integer.parseInt(value);
+         try {
+             JsonObjectRequest request = new JsonObjectRequest(
+                     Request.Method.GET,
+                     "http://numbersapi.com/" + value + "/trivia",
+                     null,
+                     new Response.Listener<JSONObject>() {
+                         @Override
+                         public void onResponse(final JSONObject response) {
+                             Log.d(TAG, "Received response.");
+                             try {
+                                 String string = response.getString("text");
+                                 textView.setText(string);
+                             } catch (Exception e) {
+                                 Log.e(TAG, response + "is invalid");
+                             }
+                         }
+                     }, new Response.ErrorListener() {
+                 @Override
+                 public void onErrorResponse(final VolleyError error) {
+                     Log.e(TAG, "error.");
+                     textView.setText("Got error, ");
+                 }
+             });
+             requestQueue.add(request);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
 }
