@@ -1,6 +1,5 @@
 package edu.illinois.cs.cs125.spring2019.lab12;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,15 +25,14 @@ public final class MainActivity extends AppCompatActivity {
      * Default logging tag for messages from the main activity.
      */
     private static final String TAG = "Lab12:Main";
-    private static RequestQueue requestQueue;
+
     private Button btn1;
     private EditText editText;
     private TextView textView;
     private String toPrint;
 
-    /**
-     * Request queue for our API requests.
-     */
+    /** Request queue for our API requests. */
+    private static RequestQueue requestQueue;
 
     /**
      * Run when this activity comes to the foreground.
@@ -45,6 +43,7 @@ public final class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startAPICall("192.17.86.8");
         btn1 = (Button) findViewById(R.id.enter1);
         editText = (EditText) findViewById(R.id.enterNumber);
         textView = (TextView) findViewById(R.id.outputDisplay);
@@ -64,9 +63,15 @@ public final class MainActivity extends AppCompatActivity {
                                 public void onResponse(final JSONObject response) {
                                     try {
                                         JSONObject a = response.getJSONObject("metadata");
-                                        String b = a.get("text").toString();
+                                        String b = a.toString();
+                                        textView.setText(b);
+                                        //response.getJSONArray("candidates").getJSONObject(0);
+                                        //JSONObject b = (JSONObject) a.get("metadata");
+                                        //String c = b.getString("text");
+                                        //textView.setText(c);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
+                                        textView.setText("Got error, ");
                                     }
                                 }
                             }, new Response.ErrorListener() {
@@ -75,9 +80,11 @@ public final class MainActivity extends AppCompatActivity {
                             Log.e(TAG, "error.");
                             textView.setText("Got error, ");
                         }
-                    }
-                    );
-                } catch
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    textView.setText("Got error, ");
+                }
             }
         });
     }
@@ -115,6 +122,4 @@ public final class MainActivity extends AppCompatActivity {
          } catch (Exception e) {
              e.printStackTrace();
          }
-     }
-}
-     */
+     }*／
