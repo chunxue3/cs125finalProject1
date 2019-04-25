@@ -14,6 +14,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -62,9 +64,17 @@ public final class MainActivity extends AppCompatActivity {
                                 public void onResponse(JSONObject response) {
                                     try {
                                         JSONObject a = response.getJSONObject("metadata");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
                                 }
-                            }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e(TAG, "error.");
+                            textView.setText("Got error, ");
+                        }
+                    }
                     )
                 }
             }
