@@ -24,12 +24,15 @@ public final class MainActivity extends AppCompatActivity {
      * Default logging tag for messages from the main activity.
      */
     private static final String TAG = "Lab12:Main";
-
+    private static RequestQueue requestQueue;
+    private Button btn1;
+    private EditText editText;
+    private TextView textView;
+    private String toPrint;
 
     /**
      * Request queue for our API requests.
      */
-    private static RequestQueue requestQueue;
 
     /**
      * Run when this activity comes to the foreground.
@@ -39,41 +42,51 @@ public final class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn1 = (Button) findViewById(R.id.enter1);
+        editText = (EditText) findViewById(R.id.enterNumber);
+        textView = (TextView) findViewById(R.id.outputDisplay);
 
         // Set up the queue for our API requests
-        setContentView(R.layout.activity_main);
         requestQueue = Volley.newRequestQueue(this);
-
-        Button btn1 = (Button) findViewById(R.id.enter1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                TextView textView = (TextView) findViewById(R.id.outputDisplay);
-                EditText editText = (EditText) findViewById(R.id.enterNumber);
-                sendRequestAndPrintReponse1(textView, editText);
+                try {
+                    JsonObjectRequest request = new JsonObjectRequest(
+                            Request.Method.GET,
+                            "http://numbersapi.com/" + x + "/trivia?notfound=floor&fragment",
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        JSONObject a = response.getJSONObject("metadata");
+                                    }
+                                }
+                            }
+                    )
+                }
             }
         });
     }
 
      private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
          String value;
-         if (editText == null || editText.length() == 0) {
-             value = "random";
-         } else {
-             value = editText.getText().toString();
-         }
+         value = editText.getText().toString();
          //int findValue = Integer.parseInt(value);
          try {
              JsonObjectRequest request = new JsonObjectRequest(
                      Request.Method.GET,
-                     "http://numbersapi.com/" + value + "/trivia",
+                     "http://numbersapi.com/" + value + "/trivia?notfound=floor&fragment",
                      null,
                      new Response.Listener<JSONObject>() {
                          @Override
                          public void onResponse(final JSONObject response) {
                              Log.d(TAG, "Received response.");
                              try {
-                                 String string = response.getString("text");
+                                 Object a = response.getJSONObject("meta-data").get("text");
+                                 String string = (String) a;
                                  textView.setText(string);
                              } catch (Exception e) {
                                  Log.e(TAG, response + "is invalid");
