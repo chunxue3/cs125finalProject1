@@ -43,7 +43,6 @@ public final class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startAPICall("192.17.86.8");
         btn1 = (Button) findViewById(R.id.enter1);
         editText = (EditText) findViewById(R.id.enterNumber);
         textView = (TextView) findViewById(R.id.outputDisplay);
@@ -90,36 +89,38 @@ public final class MainActivity extends AppCompatActivity {
     }
 }
 
-     /*private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
-         String value;
-         value = editText.getText().toString();
-         //int findValue = Integer.parseInt(value);
-         try {
-             JsonObjectRequest request = new JsonObjectRequest(
-                     Request.Method.GET,
-                     "http://numbersapi.com/" + value + "/trivia?notfound=floor&fragment",
-                     null,
-                     new Response.Listener<JSONObject>() {
-                         @Override
-                         public void onResponse(final JSONObject response) {
-                             Log.d(TAG, "Received response.");
-                             try {
-                                 Object a = response.getJSONObject("meta-data").get("text");
-                                 String string = (String) a;
-                                 textView.setText(string);
-                             } catch (Exception e) {
-                                 Log.e(TAG, response + "is invalid");
-                             }
-                         }
-                     }, new Response.ErrorListener() {
-                 @Override
-                 public void onErrorResponse(final VolleyError error) {
-                     Log.e(TAG, "error.");
-                     textView.setText("Got error, ");
-                 }
-             });
-             requestQueue.add(request);
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }*／
+/**
+ * private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
+ *          String value;
+ *          value = editText.getText().toString();
+ *          //int findValue = Integer.parseInt(value);
+ *          try {
+ *              JsonObjectRequest request = new JsonObjectRequest(
+ *                      Request.Method.GET,
+ *                      "http://numbersapi.com/" + value + "/trivia?notfound=floor&fragment",
+ *                      null,
+ *                      new Response.Listener<JSONObject>() {
+ *                          @Override
+ *                          public void onResponse(final JSONObject response) {
+ *                              Log.d(TAG, "Received response.");
+ *                              try {
+ *                                  Object a = response.getJSONObject("meta-data").get("text");
+ *                                  String string = (String) a;
+ *                                  textView.setText(string);
+ *                              } catch (Exception e) {
+ *                                  Log.e(TAG, response + "is invalid");
+ *                              }
+ *                          }
+ *                      }, new Response.ErrorListener() {
+ *                  @Override
+ *                  public void onErrorResponse(final VolleyError error) {
+ *                      Log.e(TAG, "error.");
+ *                      textView.setText("Got error, ");
+ *                  }
+ *              });
+ *              requestQueue.add(request);
+ *          } catch (Exception e) {
+ *              e.printStackTrace();
+ *          }
+ *      }
+ */
