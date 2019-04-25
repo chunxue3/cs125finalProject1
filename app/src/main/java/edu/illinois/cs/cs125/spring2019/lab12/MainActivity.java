@@ -57,31 +57,33 @@ public final class MainActivity extends AppCompatActivity {
                 try {
                     JsonObjectRequest request = new JsonObjectRequest(
                             Request.Method.GET,
-                            "http://numbersapi.com/" + x + "/trivia?notfound=floor&fragment",
+                            "http://numbersapi.com/" + editText.getText().toString() + "/trivia?notfound=floor&fragment",
                             null,
                             new Response.Listener<JSONObject>() {
                                 @Override
-                                public void onResponse(JSONObject response) {
+                                public void onResponse(final JSONObject response) {
                                     try {
                                         JSONObject a = response.getJSONObject("metadata");
+                                        String b = a.get("text").toString();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
                             }, new Response.ErrorListener() {
                         @Override
-                        public void onErrorResponse(VolleyError error) {
+                        public void onErrorResponse(final VolleyError error) {
                             Log.e(TAG, "error.");
                             textView.setText("Got error, ");
                         }
                     }
-                    )
-                }
+                    );
+                } catch
             }
         });
     }
+}
 
-     private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
+     /*private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
          String value;
          value = editText.getText().toString();
          //int findValue = Integer.parseInt(value);
@@ -115,3 +117,4 @@ public final class MainActivity extends AppCompatActivity {
          }
      }
 }
+     */
