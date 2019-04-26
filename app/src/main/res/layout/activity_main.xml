@@ -17,7 +17,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="100dp"
-        android:text="What does this mean..."
+        android:text="longtitude, latitude"
         android:textSize="32dp" />
 
     <EditText

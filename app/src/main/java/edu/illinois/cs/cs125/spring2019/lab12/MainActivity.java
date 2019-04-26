@@ -1,28 +1,6 @@
 package edu.illinois.cs.cs125.spring2019.lab12;
 
-/*
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        AppConstants.initialization(this.getApplicationContext());
-    }
-
-    public void startGame(final View view) {
-        //Log.i("ImageButton","clicked");
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-        finish();
-    }
-}
-*/
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -117,39 +95,3 @@ public final class MainActivity extends AppCompatActivity {
         });
     }
 }
-
-/**
- * private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
- *          String value;
- *          value = editText.getText().toString();
- *          //int findValue = Integer.parseInt(value);
- *          try {
- *              JsonObjectRequest request = new JsonObjectRequest(
- *                      Request.Method.GET,
- *                      "http://numbersapi.com/" + value + "/trivia?notfound=floor&fragment",
- *                      null,
- *                      new Response.Listener<JSONObject>() {
- *                          @Override
- *                          public void onResponse(final JSONObject response) {
- *                              Log.d(TAG, "Received response.");
- *                              try {
- *                                  Object a = response.getJSONObject("meta-data").get("text");
- *                                  String string = (String) a;
- *                                  textView.setText(string);
- *                              } catch (Exception e) {
- *                                  Log.e(TAG, response + "is invalid");
- *                              }
- *                          }
- *                      }, new Response.ErrorListener() {
- *                  @Override
- *                  public void onErrorResponse(final VolleyError error) {
- *                      Log.e(TAG, "error.");
- *                      textView.setText("Got error, ");
- *                  }
- *              });
- *              requestQueue.add(request);
- *          } catch (Exception e) {
- *              e.printStackTrace();
- *          }
- *      }
- */
