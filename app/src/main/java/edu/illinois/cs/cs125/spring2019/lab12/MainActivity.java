@@ -1,5 +1,27 @@
 package edu.illinois.cs.cs125.spring2019.lab12;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        AppConstants.initialization(this.getApplicationContext());
+    }
+
+    public void startGame(final View view) {
+        //Log.i("ImageButton","clicked");
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+        finish();
+    }
+}
+/**
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,19 +42,18 @@ import org.json.JSONObject;
 /**
  * Main class for our UI design lab.
  */
-public final class MainActivity extends AppCompatActivity {
+/*public final class MainActivity extends AppCompatActivity {
     /**
      * Default logging tag for messages from the main activity.
      */
-    private static final String TAG = "Lab12:Main";
+    /*private static final String TAG = "Lab12:Main";
 
     private Button btn1;
     private EditText editText;
     private TextView textView;
-    private String toPrint;
 
     /** Request queue for our API requests. */
-    private static RequestQueue requestQueue;
+    /*private static RequestQueue requestQueue;
 
     /**
      * Run when this activity comes to the foreground.
@@ -40,7 +61,7 @@ public final class MainActivity extends AppCompatActivity {
      * @param savedInstanceState unused
      */
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    /*protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn1 = (Button) findViewById(R.id.enter1);
@@ -61,13 +82,8 @@ public final class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(final JSONObject response) {
                                     try {
-                                        JSONObject a = response.getJSONObject("metadata");
-                                        String b = a.toString();
-                                        textView.setText(b);
-                                        //response.getJSONArray("candidates").getJSONObject(0);
-                                        //JSONObject b = (JSONObject) a.get("metadata");
-                                        //String c = b.getString("text");
-                                        //textView.setText(c);
+                                        String c = b.getString("text");
+                                        textView.setText(c);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         textView.setText("Got error, ");
@@ -88,6 +104,7 @@ public final class MainActivity extends AppCompatActivity {
         });
     }
 }
+*/
 
 /**
  * private void sendRequestAndPrintReponse1(final TextView textView, final EditText editText) {
