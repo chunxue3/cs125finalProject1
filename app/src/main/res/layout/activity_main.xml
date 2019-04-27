@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e9c0fd"
     android:gravity="center_vertical|center"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -11,14 +12,15 @@
 
     <TextView
         android:id="@+id/outputDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="85dp"
-        android:layout_marginTop="-60dp"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="100dp"
-        android:text="longtitude, latitude"
-        android:textSize="32dp" />
+        android:layout_marginBottom="80dp"
+        android:text="longitude, latitude"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/state_name"
@@ -27,7 +29,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/design_default_color_primary_dark"
         android:hint="state"
         android:inputType="textCapWords"
         android:selectAllOnFocus="false"
@@ -41,7 +44,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="60dp"
+        android:textColor="@color/design_default_color_primary_dark"
         android:hint="city"
         android:inputType="textCapWords"
         android:selectAllOnFocus="false"
@@ -51,14 +55,15 @@
 
     <Button
         android:id="@+id/enter1"
-        android:layout_width="182dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:shadowColor="@color/colorAccent"
-        android:text="get a fact!"
+        android:shadowColor="#b2e2cf"
+        android:text="Find Location!"
+        android:textColorHighlight="@color/design_default_color_primary_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toEndOf="@+id/enter1"
